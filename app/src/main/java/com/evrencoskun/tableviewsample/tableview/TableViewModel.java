@@ -24,12 +24,13 @@
 
 package com.evrencoskun.tableviewsample.tableview;
 
+import static java.lang.Math.abs;
+
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 import com.evrencoskun.tableviewsample.R;
 import com.evrencoskun.tableviewsample.tableview.model.Cell;
-import com.evrencoskun.tableviewsample.tableview.model.ColumnHeader;
 import com.evrencoskun.tableviewsample.tableview.model.RowHeader;
 
 import java.util.ArrayList;
@@ -89,8 +90,8 @@ public class TableViewModel {
      * This is a dummy model list test some cases.
      */
     @NonNull
-    private List<ColumnHeader> getRandomColumnHeaderList() {
-        List<ColumnHeader> list = new ArrayList<>();
+    private List<String> getRandomColumnHeaderList() {
+        List<String> list = new ArrayList<>();
 
         for (int i = 0; i < COLUMN_SIZE; i++) {
             String title = "column " + i;
@@ -99,8 +100,7 @@ public class TableViewModel {
                 title = "large column " + i;
             }
 
-            ColumnHeader header = new ColumnHeader(String.valueOf(i), title);
-            list.add(header);
+            list.add(title);
         }
 
         return list;
@@ -121,7 +121,11 @@ public class TableViewModel {
                 if (j == 0) {
                     text = i;
                 } else if (j == 1) {
+                    // to test Sorting
                     text = random;
+                } else if (j == 2) {
+                    // to test Sorting
+                    text = abs(random) % 100;
                 } else if (j == MOOD_COLUMN_INDEX) {
                     text = random % 2 == 0 ? HAPPY : SAD;
                 } else if (j == GENDER_COLUMN_INDEX) {
@@ -129,7 +133,9 @@ public class TableViewModel {
                 }
 
                 // Create dummy id.
-                String id = j + "-" + i;
+                // String id = j + "-" + i;
+                // For Sorting to work id must be unique per row. Unique per cell is not neccessary
+                String id = "" + i;
 
                 Cell cell;
                 if (j == 3) {
@@ -169,7 +175,7 @@ public class TableViewModel {
     }
 
     @NonNull
-    public List<ColumnHeader> getColumnHeaderList() {
+    public List<String> getColumnHeaderList() {
         return getRandomColumnHeaderList();
     }
 }

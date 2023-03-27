@@ -96,7 +96,6 @@ public class TableViewAdapter<POJO extends IModelWithId>
     public void onBindColumnHeaderViewHolder(@NonNull AbstractViewHolder holder,
                                              @Nullable ColumnDefinition columnHeader,
                                              int columnPosition) {
-        //!!! TODO
         holder.setCell(columnHeader, columnPosition,-1, getColumnDefinition(columnPosition));
     }
 
@@ -284,5 +283,10 @@ public class TableViewAdapter<POJO extends IModelWithId>
         // then you should fill this method to be able create different
         // type of RowHeaderViewHolder on "onCreateRowHeaderViewHolder"
         return ColumnDefinition.COLUMN_TYPE_GENERIC;
+    }
+
+    public void setAllItems(TableViewModel<POJO> tableViewModel) {
+        setAllItems(tableViewModel.getColumnHeaderList(), tableViewModel
+                    .getRowHeaderList(), tableViewModel.getCellList());
     }
 }

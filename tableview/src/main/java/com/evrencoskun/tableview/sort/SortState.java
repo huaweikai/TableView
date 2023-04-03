@@ -49,6 +49,17 @@ public enum SortState {
      * For example, the set <code>1, 4, 0</code> in
      * <code>UNSORTED</code> order is <code>1, 4, 0</code>.
      */
-    UNSORTED
+    UNSORTED;
 
+    /** cycle through UNSORTED -> ASCENDING -> DESCENDING -> UNSORTED */
+    public static SortState next(SortState old) {
+        switch (old) {
+            case ASCENDING:
+                return DESCENDING;
+            case DESCENDING:
+                return UNSORTED;
+            default: /* UNSORTED, unknown or null */
+                return ASCENDING;
+        }
+    }
 }

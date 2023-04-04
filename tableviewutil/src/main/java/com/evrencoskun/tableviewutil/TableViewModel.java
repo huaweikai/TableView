@@ -24,7 +24,6 @@
 package com.evrencoskun.tableviewutil;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.evrencoskun.tableview.model.Cell;
 import com.evrencoskun.tableview.model.ColumnDefinition;
@@ -49,34 +48,21 @@ public class TableViewModel<POJO extends IModelWithId>  {
 
     @NonNull
     public List<List<Cell<POJO>>> getCellList() {
-        return getCellList(null);
-    }
-    @NonNull
-    public List<List<Cell<POJO>>> getCellList(@Nullable String filter) {
         List<List<Cell<POJO>>> list = new ArrayList<>();
         int numberOfColumns = columnDefinitions.size();
         for (POJO pojo : pojos) {
-            boolean match = false;
             List<Cell<POJO>> cellList = new ArrayList<>();
             for (int colId = 0; colId < numberOfColumns; colId++) {
                 ColumnDefinition<POJO> columnDefinition = columnDefinitions.get(colId);
                 Cell<POJO> cell = new Cell(pojo, columnDefinition);
                 cellList.add(cell);
-                if (!match) match = isMatch(cell.getContent(), filter);
             }
-
-            if (match) {
-                list.add(cellList);
-            }
+            list.add(cellList);
         }
 
         return list;
     }
 
-    protected boolean isMatch(Object content, String filter) {
-        if (filter == null || filter.isEmpty()) return true;
-        return content.toString().contains(filter);
-    }
     @NonNull
     public List<ColumnDefinition<POJO>> getColumnHeaderList() {
         return columnDefinitions;

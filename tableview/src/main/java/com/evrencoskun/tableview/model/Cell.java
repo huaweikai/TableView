@@ -82,6 +82,6 @@ public class Cell<POJO extends IModelWithId> implements ISortableModel, IFiltera
     @NonNull
     @Override
     public String getFilterableKeyword() {
-        return String.valueOf(getContent());
+        return getContent().toString();
     }
 }

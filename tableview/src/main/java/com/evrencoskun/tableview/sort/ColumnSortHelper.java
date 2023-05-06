@@ -62,6 +62,15 @@ public class ColumnSortHelper {
     }
 
     public void setSortingStatus(int column, @NonNull SortState status) {
+        // remove all other previous sortings. (only sorting by one column is supported)
+        for (int i = mSortingColumns.size() - 1; i >= 0; i--) {
+            Directive directive = mSortingColumns.get(i);
+            if (directive.column != column && directive.direction != SortState.UNSORTED) {
+                mSortingColumns.remove(directive);
+                sortingStatusChanged(directive.column, SortState.UNSORTED);
+            }
+        }
+
         Directive directive = getDirective(column);
         if (directive != EMPTY_DIRECTIVE) {
             mSortingColumns.remove(directive);

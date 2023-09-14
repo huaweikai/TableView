@@ -52,13 +52,13 @@ import java.util.List;
 
 public class CellRecyclerViewAdapter<C> extends AbstractRecyclerViewAdapter<List<C>> {
     @NonNull
-    private final ITableView mTableView;
+    protected final ITableView mTableView;
 
     @NonNull
-    private final RecyclerView.RecycledViewPool mRecycledViewPool;
+    protected final RecyclerView.RecycledViewPool mRecycledViewPool;
 
     // This is for testing purpose
-    private int mRecyclerViewId = 0;
+    protected int mRecyclerViewId = 0;
 
     public CellRecyclerViewAdapter(@NonNull Context context, @Nullable List<List<C>> itemList, @NonNull ITableView tableView) {
         super(context, itemList);

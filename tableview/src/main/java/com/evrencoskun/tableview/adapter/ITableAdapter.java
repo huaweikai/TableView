@@ -46,6 +46,10 @@ public interface ITableAdapter<CH, RH, C extends ISortableModel> {
 
     int getCellItemViewType(int position);
 
+    default int getCellItemViewType(int columnPosition, int rowPosition) {
+        return getCellItemViewType(columnPosition);
+    }
+
     View getCornerView();
 
     @NonNull

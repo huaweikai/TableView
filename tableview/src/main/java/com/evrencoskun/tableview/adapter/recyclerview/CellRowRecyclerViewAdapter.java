@@ -43,7 +43,7 @@ import com.evrencoskun.tableview.sort.ISortableModel;
 public class CellRowRecyclerViewAdapter<C extends ISortableModel> extends AbstractRecyclerViewAdapter<C> {
 
     private int mYPosition;
-    private final ITableAdapter mTableAdapter;
+    protected final ITableAdapter mTableAdapter;
 
     @NonNull
     private final ITableView mTableView;

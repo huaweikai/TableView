@@ -81,7 +81,11 @@ public abstract class AbstractTableAdapter<CH, RH, C extends ISortableModel> imp
                 mRowHeaderItems, this);
 
         // Create Cell RecyclerView Adapter
-        mCellRecyclerViewAdapter = new CellRecyclerViewAdapter<>(context, mCellItems, mTableView);
+        mCellRecyclerViewAdapter = createCellRecyclerViewAdapter(context);
+    }
+
+    public CellRecyclerViewAdapter<C> createCellRecyclerViewAdapter(Context context) {
+        return new CellRecyclerViewAdapter<>(context, mCellItems, mTableView);
     }
 
     public void setColumnHeaderItems(@Nullable List<CH> columnHeaderItems) {
